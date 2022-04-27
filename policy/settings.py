@@ -15,7 +15,7 @@ from decouple import config
 from dj_database_url import parse as dburl
 import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -60,7 +60,7 @@ ROOT_URLCONF = 'policy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [os.path.join(BASE_DIR, 'templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -119,20 +119,8 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
-ACCESS_CONTROL_ALLOW_ORIGIN = True
+
 CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ALLOW_ALL_ORIGINS = True
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "https://medipolicy.netlify.app"
-]
-CORS_ORIGIN_WHITELIST = [
-'http://localhost:3000',
-'http://127.0.0.1:3000',
-"https://medipolicy.netlify.app"
-]
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
