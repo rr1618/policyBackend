@@ -2,7 +2,9 @@ from .models import Customer, Policy, Vehicle
 from .serializers import CustomerSerializer, PolicySerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import viewsets
+# from rest_framework import viewsets, serializers
+from django.core import serializers
+from django.http import JsonResponse
 
 
 # Api to get the customers using customer id and update the customer object using the corresponding id
@@ -89,8 +91,10 @@ def policy(request, policy_id):
 @api_view(['GET'])
 def chart(request, region):
     chartData= [["Policies", "Month"]]
+    count = 0
     for i in range(1,13):
         pols = Policy.objects.filter(customer_id__customer_region=region,
-                                     date_of_purchase__month=i).count()
-        chartData.append([i,pols])
-    return Response(chartData)
+                                     date_of_purchase__month=i)
+        count += pols.count()
+        chartData.append([i,pols.count()])
+    return Response({'chart':chartData,'count':count})
