@@ -119,17 +119,19 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
-ACCESS_CONTROL_ALLOW_ORIGIN = '"http://localhost:3000"'
+ACCESS_CONTROL_ALLOW_ORIGIN = True
 CORS_ORIGIN_ALLOW_ALL = True
 # CORS_ALLOW_ALL_ORIGINS = True
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "http://127.0.0.1:3000"
+    "http://127.0.0.1:3000",
+    "https://medipolicy.netlify.app"
 ]
 CORS_ORIGIN_WHITELIST = [
 'http://localhost:3000',
-'http://127.0.0.1:3000'
+'http://127.0.0.1:3000',
+"https://medipolicy.netlify.app"
 ]
 CORS_ALLOW_HEADERS = [
     'accept',
