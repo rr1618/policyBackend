@@ -5,33 +5,6 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 
 
-from rest_framework.views import APIView
-
-
-# class CustomerViewSet(viewsets.ViewSet):
-#     def list(self, request):
-#         queryset = Customer.objects.all()
-#         serializer = CustomerSerializer(queryset,many=True)
-#         return Response(serializer.data)
-#
-#     def retrieve(self, request, pk=None):
-#         try:
-#             queryset = Customer.objects.get(customer_id=pk)
-#             serializer = CustomerSerializer(queryset)
-#         except:
-#             return Response({'Error': f'No  customer found with customer id {pk}'})
-#         return Response(serializer.data)
-#
-class CustomerViewSet(viewsets.ModelViewSet):
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
-
-class PolicyViewSet(viewsets.ModelViewSet):
-    queryset = Policy.objects.all()
-    serializer_class = PolicySerializer
-
-
-
 # Api to get the customers using customer id and update the customer object using the corresponding id
 @api_view(['GET', 'PUT'])
 def customer(request, customer_id):
@@ -70,7 +43,7 @@ def policySearch(request):
                 pol = Policy.objects.get(policy_id__exact=params['id'])
                 serializer = PolicySerializer(pol, many=False, context={'request': request})
             except:
-                return Response({'error':'No Policies Found'},status=400)
+                return Response({'error': 'No Policies Found'},status=400)
             return Response(serializer.data)
         # if the search parameter has the customer , search will take place on customer id
         elif params['search'] == 'customer':
@@ -92,6 +65,7 @@ def policy(request, policy_id):
     print("entered")
     if request.method == 'PUT':
         data = request.data
+        print(data)
         try:
             # making changes in the vehicle model if it has been modified from client
             vechicle_id = Vehicle.objects.get(vehicle_segment=data['segment'])
@@ -116,6 +90,7 @@ def policy(request, policy_id):
 def chart(request, region):
     chartData= [["Policies", "Month"]]
     for i in range(1,13):
-        pols = Policy.objects.filter(customer_id__customer_region=region, date_of_purchase__month=i).count()
+        pols = Policy.objects.filter(customer_id__customer_region=region,
+                                     date_of_purchase__month=i).count()
         chartData.append([i,pols])
     return Response(chartData)
