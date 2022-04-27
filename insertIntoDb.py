@@ -30,30 +30,25 @@ cursor = connection.cursor()
 no_records = 0;
 # Opening the person-records.csv file
 with open('customer.csv', 'r') as file:
-
-	for row in file:
-
-		cursor.execute("INSERT INTO mediAssist_customer  VALUES (?,?,?,?,?)" ,row.split(","))
+	reader = csv.reader(file)
+	for row in reader:
+		cursor.execute("INSERT INTO mediAssist_customer  VALUES (%s,%s,%s,%s,%s)" ,row)
 		connection.commit()
 		no_records += 1
 
 with open('policy.csv', 'r') as file:
-
-	for row in file:
-
-		cursor.execute("INSERT INTO mediAssist_policy  VALUES (?,?,?,?,?,?,?,?,?,?)" ,row.split(","))
+	reader = csv.reader(file)
+	for row in reader:
+		cursor.execute("INSERT INTO mediAssist_policy  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" ,row)
 		connection.commit()
 		no_records += 1
 
 with open('vehicle.csv', 'r') as file:
-
-	for row in file:
-
-		cursor.execute("INSERT INTO mediAssist_vehicle  VALUES (?,?,?)" ,row.split(","))
+	reader = csv.reader(file)
+	for row in reader:
+		cursor.execute("INSERT INTO mediAssist_vehicle  VALUES (%s,%s,%s)" ,row)
 		connection.commit()
 		no_records += 1
-
-
 
 connection.close()
 
