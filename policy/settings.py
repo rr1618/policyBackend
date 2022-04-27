@@ -111,6 +111,38 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+ACCESS_CONTROL_ALLOW_ORIGIN = '"http://localhost:3000"'
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_ALL_ORIGINS = True
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
+]
+CORS_ORIGIN_WHITELIST = [
+'http://localhost:3000',
+'http://127.0.0.1:3000'
+]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
